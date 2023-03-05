@@ -1,24 +1,25 @@
 import java.io.*;
 import java.util.*;
 
-class Node<T> {
-  T data;
-  Node<T> next;
+class Interval {
+    int start;
+    int end;
 
-  Node(T data) {
-    this.data = data;
-    this.next = null;
-  }
+    Interval(int start, int end) {
+        this.start = start;
+        this.end = end;
+    }
 }
 
 class Test {
-  static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
 
-  static Node<Integer> takeInput() throws IOException {
-    return null;
-  }
+        ArrayList<Interval> inputArray = new ArrayList<Interval>();
 
-  public static void main(String[] args) {
+        for (int i = 0; i < n; i++) {
 
-  }
+        }
+    }
 }
