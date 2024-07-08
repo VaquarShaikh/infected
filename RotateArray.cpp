@@ -1,0 +1,45 @@
+#include <algorithm>
+#include <cmath>
+#include <iostream>
+#include <list>
+#include <queue>
+#include <set>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+typedef long long ll;
+#define ln "\n"
+#define mp make_pair
+#define pb push_back
+#define f first
+#define s second
+#define INF 2e18
+
+void rotate(vector<int> &nums, int k) {
+  int index = nums.size() - (k % nums.size()) - 1;
+  reverse(nums.begin(), nums.begin() + index + 1);
+  reverse(nums.begin() + index + 1, nums.end());
+  reverse(nums.begin(), nums.end());
+}
+
+int main() {
+  // cout<<"Hello world !";
+  int n;
+  cin >> n;
+  vector<int> nums;
+  for (int i = 0; i < n; i++) {
+    int temp;
+    cin >> temp;
+    nums.push_back(temp);
+  }
+  int k;
+  cin >> k;
+  rotate(nums, k);
+
+  for (int i = 0; i < nums.size(); i++) {
+    cout << nums[i] << " ";
+  }
+  cout << endl;
+}

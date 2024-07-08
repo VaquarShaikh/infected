@@ -1,0 +1,44 @@
+<h1 id="endpoint-model-package-git">Endpoint , Model Package , Git</h1>
+<p><em>It is not straightforward to find relevant data for testing the apis. The more you practice the better you get at finding it, after a while , intution starts kicking in and you get better at this.</em></p>
+<h2 id="endpoint">1. Endpoint</h2>
+<hr />
+<h4 id="generic-way-to-find-an-endpoint"><em>Generic way to find an endpoint :</em></h4>
+<p>Search servicename on code browser , you should get <em><servicename_>clientconfig</em> , (result with client config as suffix ).</p>
+<hr />
+<p>Finding endpoint can get tricky , here are a few steps to find an <strong>endpoint</strong> .</p>
+<ol type="1">
+<li>If you encounter a service which may have some apis already deployed , try using that endpoint , it usually works .</li>
+<li>Try finding the model package and endpoint details from the sheet shared by chaitali <em><link_to_be_pasted></em> .</li>
+<li>Based on the metadata , try searching the parameters inside metadata randomly on code browser , there is quite high probability that you might find something relevant under the name <strong>ClientConfig</strong>.</li>
+<li>If you manage to find the versionset , clicking under <em>show packages that consume this versionset</em> , you could find something relevant where you might fetch endpoint (need to further elaborate this).</li>
+<li>There is a website where you can try searching the name of endpoint by typing your service name <em>(regions.dev)</em> .</li>
+<li>On close observation , you will see that the structure of the endpoint is usually : <code>service_id.regionname.amazonaws.com</code> .</li>
+<li>The main regions to try are : <code>us-east-1 , us-east-2 , us-west-1 , us-west-2</code> the chances are pretty slim for the endpoint to work , if the region is different from these 4 .</li>
+<li>There is a way where you can find the region name , if you happen to find the model package , check the pipeline , search for the region where pipeline is deployed . <em>Releases -&gt; Track in pipelines</em></li>
+<li>There are two files by the name <em>services.json</em> and <em>endpoint_correlation.txt</em> if you are lucky , you might find your required endpoint over here .</li>
+</ol>
+<h2 id="model-package">2. Model Package</h2>
+<hr />
+<ol type="1">
+<li>There is a sheet by the name <em>Services - Phase 1</em> and <em>Model endpoint details</em> if you are lucky enough , you might get model package name from there . <em>links to be attatched .</em></li>
+<li>A lot of the times , if you just search the service name , the model package name appears in suggestions <em><service_name>model</em> (model as suffix) .</li>
+<li>If you happen to find the service-internal-name from any sheet which has been shared , try searching that on code browser , you might get model package name .</li>
+<li>Sometimes , the model package name is not that important , you directly find a service-2 json or c2j folder on code browser , in the build section you can find normal json for c2j and if the apis are present , you can directly proceed from there .</li>
+<li><p>There might be instances where in you might find apis in model package but in a different branch , follow the steps below :</p>
+<ol type="a">
+<li><p>Fill appropriate metadata in build json and config of Boto3ModelGeneratorTemplate .</p></li>
+<li><p>Clone the model package with the required branch .</p></li>
+<li><p>Build the package with the given versionset . <em>(Check the releases tab)</em></p></li>
+<li><p>Also , without changing the versionset , build Boto3ModelGeneratorTemplate .</p></li>
+<li><p>If everything goes as expected , you should see a normal json constructed in build folder of Boto3ModelGeneratorTemplate with required set of apis .</p></li>
+</ol></li>
+</ol>
+<h2 id="git">3. Git</h2>
+<hr />
+<p>This is a basic guide on renaming a folder in git . if you rename directly using intellij rename and then raise a cr , a copy might get passed instead of the original file getting renamed . Here are a few steps on how to rename a file or a folder in git .</p>
+<ol type="1">
+<li>Make sure you take the latest pull first .</li>
+<li>Eg : inside internal-workmailservice you wish to change the name of the dated folder , you go inside Boto3-models-&gt;service_models-&gt;internal-workmailservice using terminal .</li>
+<li>Use the command <code>git mv &lt;old_name&gt; &lt;new_name&gt;</code> .</li>
+<li>If you have followed through properly , after typing <code>git status</code> you should see the folder/file having status as : <code>renamed</code> .</li>
+</ol>

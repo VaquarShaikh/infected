@@ -1,0 +1,94 @@
+== Endpoint , Model Package , Git
+
+_It is not straightforward to find relevant data for testing the apis.
+The more you practice the better you get at finding it, after a while ,
+intution starts kicking in and you get better at this._
+
+=== 1. Endpoint
+
+'''''
+
+==== _Generic way to find an endpoint :_
+
+Search servicename on code browser , you should get _clientconfig_ ,
+(result with client config as suffix ).
+
+'''''
+
+Finding endpoint can get tricky , here are a few steps to find an
+*endpoint* .
+
+[arabic]
+. If you encounter a service which may have some apis already deployed ,
+try using that endpoint , it usually works .
+. Try finding the model package and endpoint details from the sheet
+shared by chaitali __ .
+. Based on the metadata , try searching the parameters inside metadata
+randomly on code browser , there is quite high probability that you
+might find something relevant under the name *ClientConfig*.
+. If you manage to find the versionset , clicking under _show packages
+that consume this versionset_ , you could find something relevant where
+you might fetch endpoint (need to further elaborate this).
+. There is a website where you can try searching the name of endpoint by
+typing your service name _(regions.dev)_ .
+. On close observation , you will see that the structure of the endpoint
+is usually : `service_id.regionname.amazonaws.com` .
+. The main regions to try are :
+`us-east-1 , us-east-2 , us-west-1 , us-west-2` the chances are pretty
+slim for the endpoint to work , if the region is different from these 4
+.
+. There is a way where you can find the region name , if you happen to
+find the model package , check the pipeline , search for the region
+where pipeline is deployed . _Releases -> Track in pipelines_
+. There are two files by the name _services.json_ and
+_endpoint_correlation.txt_ if you are lucky , you might find your
+required endpoint over here .
+
+=== 2. Model Package
+
+'''''
+
+[arabic]
+. There is a sheet by the name _Services - Phase 1_ and _Model endpoint
+details_ if you are lucky enough , you might get model package name from
+there . _links to be attatched ._
+. A lot of the times , if you just search the service name , the model
+package name appears in suggestions _model_ (model as suffix) .
+. If you happen to find the service-internal-name from any sheet which
+has been shared , try searching that on code browser , you might get
+model package name .
+. Sometimes , the model package name is not that important , you
+directly find a service-2 json or c2j folder on code browser , in the
+build section you can find normal json for c2j and if the apis are
+present , you can directly proceed from there .
+. There might be instances where in you might find apis in model package
+but in a different branch , follow the steps below :
+[loweralpha]
+.. Fill appropriate metadata in build json and config of
+Boto3ModelGeneratorTemplate .
+.. Clone the model package with the required branch .
+.. Build the package with the given versionset . _(Check the releases
+tab)_
+.. Also , without changing the versionset , build
+Boto3ModelGeneratorTemplate .
+.. If everything goes as expected , you should see a normal json
+constructed in build folder of Boto3ModelGeneratorTemplate with required
+set of apis .
+
+=== 3. Git
+
+'''''
+
+This is a basic guide on renaming a folder in git . if you rename
+directly using intellij rename and then raise a cr , a copy might get
+passed instead of the original file getting renamed . Here are a few
+steps on how to rename a file or a folder in git .
+
+[arabic]
+. Make sure you take the latest pull first .
+. Eg : inside internal-workmailservice you wish to change the name of
+the dated folder , you go inside
+Boto3-models->service_models->internal-workmailservice using terminal .
+. Use the command `git mv <old_name> <new_name>` .
+. If you have followed through properly , after typing `git status` you
+should see the folder/file having status as : `renamed` .

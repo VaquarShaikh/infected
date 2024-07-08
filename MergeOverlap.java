@@ -1,6 +1,4 @@
 import java.util.*;
-import java.util.Arrays;
-import java.util.Scanner;
 import java.io.*;
 
 class Interval {
@@ -20,48 +18,36 @@ class SortByStart implements Comparator<Interval> {
 }
 
 class Solution {
-    public ArrayList<Interval> mergeIntervals(ArrayList<Interval> inputArray) {
+    void mergeIntervals(ArrayList<Interval> inputArray) {
         Collections.sort(inputArray, new SortByStart());
-
-        Stack<Interval> storeIntervals = new Stack<Interval>();
-        storeIntervals.push(inputArray.get(0));
-
+        int index = 0;
         for (int i = 1; i < inputArray.size(); i++) {
-            Interval top = storeIntervals.peek();
-            // push
-            if (inputArray.get(i).start > top.end) {
-                storeIntervals.push(inputArray.get(i));
-            }
-            // merge
-            else if (inputArray.get(i).end > top.end) {
-                top.end = inputArray.get(i).end;
-                storeIntervals.push(storeIntervals.pop());
+            // overlapping condition
+            if (inputArray.get(index).end >= inputArray.get(i).start) {
+                inputArray.set(index, new Interval(inputArray.get(index).start,
+                        Math.max(inputArray.get(index).end, inputArray.get(i).end)));
+            } else {
+                inputArray.set(++index, new Interval(inputArray.get(i).start, inputArray.get(i).end));
             }
         }
-        ArrayList<Interval> result = new ArrayList<Interval>();
-        while (!storeIntervals.empty()) {
-            result.add(storeIntervals.pop());
+        System.out.println("Merged Intervals : ");
+        for (int i = 0; i <= index; i++) {
+            System.out.println(inputArray.get(i).start + " " + inputArray.get(i).end);
         }
-        Collections.sort(result, new SortByStart());
-        return result;
     }
 }
 
-class MergeOverlap {
+public class MergeOverlap {
     public static void main(String[] args) {
-        // System.out.println();
+        // System.out.println("Hello World!");
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
         ArrayList<Interval> inputArray = new ArrayList<Interval>();
         for (int i = 0; i < n; i++) {
             inputArray.add(new Interval(sc.nextInt(), sc.nextInt()));
         }
-
         Solution obj = new Solution();
-        ArrayList<Interval> outputArray = obj.mergeIntervals(inputArray);
+        obj.mergeIntervals(inputArray);
 
-        for (int i = 0; i < outputArray.size(); i++) {
-            System.out.println(outputArray.get(i).start + " " + outputArray.get(i).end);
-        }
     }
 }

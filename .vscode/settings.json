@@ -1,3 +1,39 @@
 {
-	"java.format.settings.url": "eclipse-formatter.xml"
+	"java.format.settings.url": "eclipse-formatter.xml",
+	"C_Cpp.errorSquiggles": "enabled",
+	"files.associations": {
+		".env": "env",
+		".env.local": "env",
+		"iostream": "cpp",
+		"ostream": "cpp",
+		"algorithm": "cpp",
+		"unordered_map": "cpp",
+		"vector": "cpp",
+		"type_traits": "cpp",
+		"deque": "cpp",
+		"string": "cpp",
+		"*.tcc": "cpp",
+		"forward_list": "cpp",
+		"list": "cpp",
+		"system_error": "cpp",
+		"array": "cpp",
+		"regex": "cpp",
+		"bitset": "cpp",
+		"string_view": "cpp",
+		"initializer_list": "cpp",
+		"utility": "cpp",
+		"valarray": "cpp",
+		"set": "cpp",
+		"unordered_set": "cpp"
+	},
+	"C_Cpp.default.compilerPath": "/usr/bin/g++",
+	"C_Cpp.intelliSenseEngineFallback": "enabled",
+	"[cpp]": {
+		// "editor.wordBasedSuggestions": "allDocuments",
+		// "editor.suggest.insertMode": "replace",
+		"editor.semanticHighlighting.enabled": true,
+		// "editor.useTabStops": true,
+		"editor.insertSpaces": false,
+		"editor.tabSize": 4
+	}
 }
