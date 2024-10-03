@@ -24,16 +24,14 @@ typedef pair<int, int> pii;
 #define INFF 1000000009
 
 class LRUCache {
-  private:
+   private:
 	list<int> items;
 	unordered_map<int, pair<int, list<int>::iterator>> keyValuesMap;
 	int csize;
 
-  public:
+   public:
 	LRUCache(int size) : csize(size) {
-		if (csize < 1) {
-			csize = 10;
-		}
+		if (csize < 1) { csize = 10; }
 	}
 
 	void set(int key, int val) {
@@ -83,7 +81,5 @@ int main() {
 
 	try {
 		cout << cache.get(2) << endl;
-	} catch (const out_of_range &e) {
-		cout << e.what() << endl;
-	}
+	} catch (const out_of_range &e) { cout << e.what() << endl; }
 }

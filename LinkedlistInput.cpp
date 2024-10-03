@@ -20,51 +20,52 @@ typedef long long ll;
 #define s second
 #define INF 2e18
 
-template <typename T> class Node {
-  public:
-	T data;
-	Node<T> *next;
-	Node(T data) : data(data), next(nullptr) {}
+template <typename T>
+class Node {
+   public:
+    T data;
+    Node<T> *next;
+    Node(T data) : data(data), next(nullptr) {}
 };
 
 class LinkedList {
-  public:
-	Node<int> *takeInput() {
-		Node<int> *head;
-		Node<int> *tail;
+   public:
+    Node<int> *takeInput() {
+        Node<int> *head;
+        Node<int> *tail;
 
-		string input;
-		getline(cin, input);
-		stringstream ss(input);
+        string input;
+        getline(cin, input);
+        stringstream ss(input);
 
-		int val;
-		while (ss >> val) {
-			Node<int> *newNode = new Node<int>(val);
-			if (!head) {
-				head = newNode;
-				tail = newNode;
-			} else {
-				tail->next = newNode;
-				tail = newNode;
-			}
-		}
-		return head;
-	}
+        int val;
+        while (ss >> val) {
+            Node<int> *newNode = new Node<int>(val);
+            if (!head) {
+                head = newNode;
+                tail = newNode;
+            } else {
+                tail->next = newNode;
+                tail = newNode;
+            }
+        }
+        return head;
+    }
 
-	void printList(Node<int> *head) {
-		Node<int> *temp = head;
-		while (temp != NULL) {
-			cout << temp->data << " ";
-			temp = temp->next;
-		}
-		cout << endl;
-	}
+    void printList(Node<int> *head) {
+        Node<int> *temp = head;
+        while (temp != NULL) {
+            cout << temp->data << " ";
+            temp = temp->next;
+        }
+        cout << endl;
+    }
 };
 
 int main() {
-	// Hello World
-	// cout << "Hello world !" << endl;
-	LinkedList ll;
-	Node<int> *head = ll.takeInput();
-	ll.printList(head);
+    // Hello World
+    // cout << "Hello world !" << endl;
+    LinkedList ll;
+    Node<int> *head = ll.takeInput();
+    ll.printList(head);
 }

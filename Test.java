@@ -1,22 +1,35 @@
 import java.util.*;
 import java.io.*;
 
+class Node<T> {
+    T data;
+    Node<T> next;
+
+    Node(T data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+
+class LinkedList {
+    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+    public Node<Integer> takeInput() throws IOException {
+        Node<Integer> head = null;
+        Node<Integer> tail = null;
+
+        String[] data = br.readLine().trim().split(" ");
+
+        for (int i = 0; i < data.length; i++) {
+            Node<Integer> newNode = new Node<Integer>(Integer.parseInt(data[i]));
+        }
+
+        return head;
+    }
+}
+
 public class Test {
-	public static void main(String[] args) {
-		// System.out.println("Hello World");
-		Scanner sc = new Scanner(System.in);
-		int t = sc.nextInt();
-		while (t-- > 0) {
-			int n = sc.nextInt();
-			int num = 0;
-			while (n-- > 0) {
-				num = sc.nextInt();
-			}
-			if (num % 10 == 5 || num % 10 == 0) {
-				System.out.println("LUCKY");
-			} else {
-				System.out.println("UNLUCKY");
-			}
-		}
-	}
+    public static void main(String[] args) {
+
+    }
 }

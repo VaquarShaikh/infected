@@ -1,14 +1,25 @@
+#include <stdexcept>
+#pragma GCC optimize("Ofast")
+#pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,avx2,fma")
+#pragma GCC optimize("unroll-loops")
+
 #include <algorithm>
 #include <climits>
 #include <cmath>
+#include <cstddef>
+#include <cstdlib>
+#include <ctime>
+#include <functional>
 #include <iostream>
 #include <list>
+#include <numeric>
 #include <queue>
 #include <set>
 #include <sstream>
 #include <stack>
 #include <string>
 #include <unordered_map>
+#include <utility>
 #include <vector>
 
 using namespace std;
@@ -22,92 +33,78 @@ typedef pair<int, int> pii;
 #define s second
 #define INF 2e18
 #define INFF 1000000009
+#define fast_cin()                    \
+    ios_base::sync_with_stdio(false); \
+    cin.tie(NULL);                    \
+    cout.tie(NULL)
 
 class Queue {
-  private:
-	int *data;
-	int capacity;
-	int size;
-	int frontIndex;
-	int rearIndex;
+   private:
+    int capacity, size, frontIndex, rearIndex, *data;
 
-  public:
-	Queue(int initialSize) {
-		if (initialSize < 1) {
-			cerr << "Size should be atleast 1" << endl;
-		}
-		capacity = initialSize;
-		data = new int[capacity];
-		frontIndex = rearIndex = -1;
-		size = 0;
-	}
+    void resize(int newCapacity) {
+        int* newData = new int[newCapacity];
+        for (int i = 0; i < size; ++i) newData[i] = data[(frontIndex + i) % capacity];
+        delete[] data;
+        data = newData;
+        frontIndex = 0;
+        rearIndex = size - 1;
+        capacity = newCapacity;
+    }
 
-	~Queue() { delete[] data; }
+   public:
+    Queue(int initialSize)
+        : capacity(initialSize),
+          data(new int[capacity]),
+          size(0),
+          frontIndex(0),
+          rearIndex(-1) {}
 
-	int getSize() { return size; }
+    ~Queue() { delete[] data; }
 
-	bool isFull() { return size == capacity; }
+    int getSize() { return size; }
 
-	bool isEmpty() { return size == 0; }
+    bool isEmpty() { return size == 0; }
 
-	void enqueue(int val) {
-		if (isFull()) {
-			cout << "Queue is full resizing" << endl;
-			resize(capacity * 2);
-		}
-		rearIndex = (rearIndex + 1) % capacity;
-		data[rearIndex] = val;
-		size++;
-	}
+    bool isFull() { return !isEmpty(); }
 
-	int dequeue() {
-		if (isEmpty()) {
-			cerr << "Queue is empty" << endl;
-			return INT_MIN;
-		}
-		int frontElement = data[(frontIndex + 1) % capacity];
-		frontIndex = (frontIndex + 1) % capacity;
-		--size;
-		if (size == 0) {
-			frontIndex = rearIndex = -1;
-		}
-		return frontElement;
-	}
+    void enqueue(int val) {
+        if (isFull()) resize(capacity * 2);
+        rearIndex = (rearIndex + 1) % capacity;
+        data[rearIndex] = val;
+        ++size;
+    }
 
-	int top() {
-		if (isEmpty()) {
-			cerr << "Stack is empty" << endl;
-			return INT_MIN;
-		}
-		return data[(frontIndex + 1) % capacity];
-	}
+    int front() { return data[frontIndex]; }
 
-  private:
-	void resize(int newCapacity) {
-		int *newData = new int[newCapacity];
-		int currentIndex = (frontIndex + 1) % capacity;
-		for (int i = 0; i < size; i++) {
-			newData[i] = data[currentIndex];
-			currentIndex = (currentIndex + 1) % capacity;
-		}
-		delete[] data;
-		data = newData;
-		capacity = newCapacity;
-		frontIndex = capacity - 1;
-		rearIndex = size - 1;
-	}
+    int dequeue() {
+        if (isEmpty()) throw out_of_range("Queue is Empty!!!");
+        int val = data[frontIndex];
+        frontIndex = (frontIndex + 1) % capacity;
+        --size;
+        return val;
+    }
 };
 
 int main() {
-	// Hello World
-	// cout << "Hello world !" << endl;
-	Queue q(3);
-	q.enqueue(101);
-	q.enqueue(222);
-	q.enqueue(390);
+    fast_cin();
+    // Hello World
+    // cout << "Hello world !" << endl;
 
-	while (!q.isEmpty()) {
-		int top = q.top();
-		cout << "Current element popped : " << q.dequeue() << endl;
-	}
+    Queue q(3);
+
+    q.enqueue(1);
+    q.enqueue(2);
+    q.enqueue(3);
+    q.enqueue(4);
+    q.enqueue(5);
+    q.enqueue(6);
+
+    while (!q.isEmpty()) {
+        cout << q.front() << " ";
+        q.dequeue();
+    }
+    cout << endl;
+
+    q.dequeue();
 }

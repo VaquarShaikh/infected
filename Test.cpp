@@ -1,16 +1,27 @@
+#pragma GCC optimize("Ofast")
+#pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,avx2,fma")
+#pragma GCC optimize("unroll-loops")
+
 #include <algorithm>
 #include <climits>
 #include <cmath>
+#include <cstddef>
+#include <cstdlib>
+#include <ctime>
 #include <functional>
 #include <iostream>
+#include <iterator>
 #include <list>
 #include <numeric>
 #include <queue>
 #include <set>
 #include <sstream>
 #include <stack>
+#include <stdexcept>
 #include <string>
 #include <unordered_map>
+#include <unordered_set>
+#include <utility>
 #include <vector>
 
 using namespace std;
@@ -24,31 +35,17 @@ typedef pair<int, int> pii;
 #define s second
 #define INF 2e18
 #define INFF 1000000009
+#define fast_cin()                    \
+    ios_base::sync_with_stdio(false); \
+    cin.tie(NULL);                    \
+    cout.tie(NULL)
 
-vector<string> letterCombinations(string digits) {
-	vector<string> res;
-	string temp,
-		dialPad[8] = {"abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+vector<pair<int, int>> A;
 
-	int n = digits.size();
-
-	function<void(int)> dfs = [&](int i) {
-		if (i == n) {
-			res.push_back(temp);
-			return;
-		}
-
-		for (char c : dialPad[digits[i] - '2']) {
-			temp.push_back(c);
-			dfs(i + 1);
-			temp.pop_back();
-		}
-	};
-	dfs(0);
-	return res;
-}
+void fun() { sort(begin(A), end(A)); }
 
 int main() {
-	// Hello World
-	// cout << "Hello world !" << endl;
+    fast_cin();
+    // Hello World
+    cout << "Hello world !" << endl;
 }

@@ -1,11 +1,6 @@
 BasedOnStyle: Google
-IndentWidth: 4
-TabWidth: 4
-UseTab: Always
-AllowShortIfStatementsOnASingleLine: true
+AllowShortIfStatementsOnASingleLine: AllIfsAndElse
+AllowShortFunctionsOnASingleLine: All
 AllowShortLoopsOnASingleLine: true
-AllowShortBlocksOnASingleLine: true
-BraceWrapping:
-  AfterFunction: false
-  AfterControlStatement: false
-  AfterClass: false
+IndentWidth: 4
+ColumnLimit: 95

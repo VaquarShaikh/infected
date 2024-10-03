@@ -24,35 +24,35 @@ typedef pair<int, int> pii;
 #define INFF 1000000009
 
 int largestRectangleArea(vector<int> &heights) {
-	heights.push_back(0);
-	int n = heights.size(), ans = 0;
-	stack<int> stack;
-	for (int i = 0; i < n; i++) {
-		while (!stack.empty() && heights[i] <= heights[stack.top()]) {
-			int height = heights[stack.top()];
-			stack.pop();
-			// do some work
-			int left = stack.size() ? stack.top() : -1;
-			ans = max(ans, (i - left - 1) * height);
-		}
-		stack.push(i);
-	}
-	return ans;
+    heights.push_back(0);
+    int n = heights.size(), ans = 0;
+    stack<int> stack;
+    for (int i = 0; i < n; i++) {
+        while (!stack.empty() && heights[i] <= heights[stack.top()]) {
+            int height = heights[stack.top()];
+            stack.pop();
+            // do some work
+            int left = stack.size() ? stack.top() : -1;
+            ans = max(ans, (i - left - 1) * height);
+        }
+        stack.push(i);
+    }
+    return ans;
 }
 
 int main() {
-	// Hello World
-	// cout << "Hello world !" << endl;
+    // Hello World
+    // cout << "Hello world !" << endl;
 
-	int n;
-	cin >> n;
+    int n;
+    cin >> n;
 
-	vector<int> heights;
+    vector<int> heights;
 
-	for (int i = 0; i < n; i++) {
-		int temp;
-		cin >> temp;
-		heights.push_back(temp);
-	}
-	cout << largestRectangleArea(heights) << endl;
+    for (int i = 0; i < n; i++) {
+        int temp;
+        cin >> temp;
+        heights.push_back(temp);
+    }
+    cout << largestRectangleArea(heights) << endl;
 }
